@@ -1,5 +1,7 @@
 package com.zhenz.java_01.charator;
 
+import javax.crypto.spec.PSource;
+
 public class Hero {
     String name; // 名字
 
@@ -10,6 +12,7 @@ public class Hero {
     int moveSpeed; // 移动速度
 
     public Hero(){
+        System.out.println("Hero 的构造方法");
     }
 
     private Hero(String heroName, float heroHp){
@@ -59,6 +62,27 @@ public class Hero {
 
     void recovery(float recoveryHp){
         this.hp += recoveryHp;
+    }
+
+    public void heroIsDie(Mortal mortal){
+        mortal.die();
+    }
+
+    public static void battleWin(){
+        System.out.println("hero battle win");
+    }
+
+    public static void main(String[] args) {
+        Hero hero = new Hero();
+
+        ADHero adHero = new ADHero();
+        APHero apHero = new APHero();
+        ADAPHero adapHero = new ADAPHero();
+
+        hero.heroIsDie(adHero);
+        hero.heroIsDie(apHero);
+        hero.heroIsDie(adapHero);
+
     }
 }
 
