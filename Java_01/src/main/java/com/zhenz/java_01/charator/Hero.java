@@ -1,5 +1,7 @@
 package com.zhenz.java_01.charator;
 
+import com.zhenz.java_01.charator03.HeroIsDiedException;
+
 import javax.crypto.spec.PSource;
 
 public class Hero {
@@ -9,10 +11,15 @@ public class Hero {
 
     float armor; // 护甲
 
-    int moveSpeed; // 移动速度
+    public int moveSpeed; // 移动速度
 
     public Hero(){
         System.out.println("Hero 的构造方法");
+    }
+
+    public Hero(String name){
+        System.out.println("Hero的有一个参数的构造方法 ");
+        this.name = name;
     }
 
     private Hero(String heroName, float heroHp){
@@ -72,6 +79,11 @@ public class Hero {
         System.out.println("hero battle win");
     }
 
+    public void attackHero(Hero hero) throws HeroIsDiedException {
+        if (hero.hp == 0){
+            throw new HeroIsDiedException(hero.name + "已经死了，不要再攻击他了。");
+        }
+    }
     public static void main(String[] args) {
         Hero hero = new Hero();
 
@@ -82,6 +94,22 @@ public class Hero {
         hero.heroIsDie(adHero);
         hero.heroIsDie(apHero);
         hero.heroIsDie(adapHero);
+
+        Hero garen = new Hero();
+        garen.hp = 100;
+        garen.name = "盖伦";
+
+        Hero timo = new Hero();
+        timo.hp = 0;
+        timo.name = "提莫";
+
+        try{
+            garen.attackHero(timo);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
 
     }
 }
